@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://fondosmil.co/fondo/32517.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center center;
+            font-family: Arial, sans-serif;
+            transition: background-image 1s ease; /* Animación suave para el cambio de fondo */
+        }
+        .button-container {
+            display: none; /* Ocultamos el botón al inicio */
+            text-align: center;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+        }
+        .button-container button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container" id="button-container">
+        <button onclick="redirectToLogin()">INICIAR SESIÓN</button>
+    </div>
+
+    <script>
+        // Función para redirigir a la página de inicio de sesión
+        function redirectToLogin() {
+            localStorage.setItem('visitedStartPage', 'true');
+            window.location.href = 'login.html';
+        }
+
+        // Cambia el fondo y muestra el botón después de 5 segundos
+        setTimeout(() => {
+            document.body.style.backgroundImage = "url('https://fondosmil.co/fondo/32512.png')";
+            document.getElementById('button-container').style.display = 'block';
+        }, 5000);
+    </script>
+</body>
+</html>

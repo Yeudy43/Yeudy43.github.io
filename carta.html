@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre con Hoja</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0f7fa;
+            margin: 0;
+        }
+        .envelope {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            height: auto;
+            aspect-ratio: 4 / 2.5;
+            background-color: #d2b48c;
+            border: 2px solid #8b4513;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: opacity 1s ease;
+        }
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            border-bottom: 60% solid #d0a483;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            z-index: 1;
+            transition: transform 1s ease;
+            transform-origin: top;
+        }
+        .line {
+            position: absolute;
+            height: 2px;
+            width: 67%;
+            background-color: #8b4513;
+            z-index: 2;
+        }
+        .line.left {
+            top: 0;
+            left: 0;
+            transform: rotate(42deg);
+            transform-origin: left;
+        }
+        .line.right {
+            top: 0;
+            right: 0;
+            transform: rotate(-42deg);
+            transform-origin: right;
+        }
+        .heart {
+            position: absolute;
+            top: calc(100% - 40px);
+            left: 50%;
+            transform: translate(-50%, -215%) rotate(-45deg);
+            width: 20px;
+            height: 20px;
+            background-color: #ff0000;
+            z-index: 3;
+            transition: transform 1s ease, opacity 1s ease;
+            cursor: pointer;
+        }
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff0000;
+            border-radius: 50%;
+        }
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+        .heart:after {
+            top: 0;
+            left: 10px;
+        }
+        .paper {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            width: 90%;
+            max-width: 425px;
+            height: 80%;
+            background-color: #ffffff;
+            border: 2px solid #8b4513;
+            transform: translateX(-50%) translateY(-100%) scaleY(0);
+            transform-origin: top;
+            z-index: 2;
+            transition: transform 1s ease, opacity 1s ease;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .paper textarea {
+            width: 90%;
+            height: 60%;
+            border: none;
+            outline: none;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #ffffff;
+            resize: none;
+        }
+        .close-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #ff6c6c;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 4;
+            transition: background-color 0.3s ease;
+        }
+        .close-button:hover {
+            background-color: #e64a19;
+        }
+        .mystery-button {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #ffa16c;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 4;
+            transition: background-color 0.3s ease;
+        }
+        .mystery-button:hover {
+            background-color: #e6894d;
+        }
+        .hidden-message {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            background-color: #9986ff;
+            color: white;
+        }
+        .hidden-message p {
+            margin: 5px 0;
+        }
+        .hidden-message input {
+            padding: 5px;
+            border: 1px solid #ffffff;
+            border-radius: 3px;
+            font-size: 14px;
+            background-color: #ad9eff; /* Fondo del cuadro de texto */
+            color: #ffffff;
+        }
+
+        /* Media Queries */
+        @media (max-width: 600px) {
+            .flap {
+                border-bottom: 80% solid #d0a483;
+            }
+            .paper {
+                width: 95%;
+                max-width: none;
+            }
+            .heart {
+                width: 25px;
+                height: 25px;
+            }
+            .hidden-message p, .hidden-message input {
+                font-size: 12px;
+            }
+            .close-button, .mystery-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope">
+        <div class="flap"></div>
+        <div class="heart"></div>
+        <div class="line left"></div>
+        <div class="line right"></div>
+    </div>
+    <div class="paper">
+        <textarea readonly>Feliz cumpleaños. Espero que este día sea muy especial para ti, porque para mí lo es. Espero que tu vida sea larga y esté llena de felicidad, porque te mereces eso y mucho más. Espero que cumplas todas tus metas y sueños, que logres muchas cosas y, sobre todo, que seas feliz. Eres una persona muy importante para mí y valoro mucho tu amistad. Te agradezco por todos los momentos bellos que hemos pasado juntos, que quisiera repetir pero no se puede. Gracias por ser la grandiosa persona que eres, espero que no cambies nunca. Gracias por estar en mis momentos malos y no irte. Gracias por ayudarme cuando lo necesité y por explicarme algo que no entendí. Perdóname si alguna vez te hice daño o hice algo que te dolió, nunca fue mi intención. No me arrepiento ni un segundo de haberte conocido. Si existen otras vidas, espero conocerte en todas ellas también. Ramelsy, en serio, eres una persona increíble, con una personalidad increíble y un cuerpo hermoso. No dejes que nadie te diga lo contrario. Eres una persona simplemente increíble, no tengo palabras para definirte. Pero gracias por permitirme conocerte y ser tal como eres. A pesar de todo lo que haya pasado, todavía sigues ahí, y eso te lo agradezco mucho. Te amo mucho.   
+
+            
+ATT: Yeudy</textarea>
+        <button class="close-button">Cerrar</button>
+        <button class="mystery-button">¿?</button> <!-- Botón de ¿? -->
+        <div class="hidden-message">
+            <p>Puedo ser tu estrella y tú ................. Mi tesoro, mi fortuna.</p>
+            <input class="answer-input" type="text" placeholder="Respuesta...">
+        </div>
+    </div>
+
+    <script>
+        const heart = document.querySelector('.heart');
+        const flap = document.querySelector('.flap');
+        const paper = document.querySelector('.paper');
+        const envelope = document.querySelector('.envelope');
+        const closeButton = document.querySelector('.close-button');
+        const mysteryButton = document.querySelector('.mystery-button');
+        const hiddenMessage = document.querySelector('.hidden-message');
+        const answerInput = document.querySelector('.answer-input');
+        let isFlapOpen = false;
+        let isMessageVisible = false;
+
+        heart.addEventListener('click', () => {
+            if (isFlapOpen) {
+                flap.style.transform = 'rotateX(0deg)';
+                paper.style.transform = 'translateX(-50%) translateY(-100%) scaleY(0)';
+                envelope.style.opacity = '1';
+                heart.style.opacity = '1';
+                heart.style.pointerEvents = 'auto';
+            } else {
+                flap.style.transform = 'rotateX(-180deg)';
+                paper.style.transform = 'translateX(-50%) translateY(0) scaleY(1)';
+                envelope.style.opacity = '0';
+                heart.style.opacity = '0';
+                heart.style.pointerEvents = 'none';
+            }
+            isFlapOpen = !isFlapOpen;
+
+            heart.style.transform = isFlapOpen 
+                ? 'translate(-50%, -215%) rotate(90deg)' 
+                : 'translate(-50%, -215%) rotate(-45deg)';
+        });
+
+        closeButton.addEventListener('click', () => {
+            if (isFlapOpen) {
+                paper.style.transform = 'translateX(-50%) translateY(-100%) scaleY(0)';
+                flap.style.transform = 'rotateX(0deg)';
+                envelope.style.opacity = '1';
+                heart.style.opacity = '1';
+                heart.style.pointerEvents = 'auto';
+                isFlapOpen = false;
+                heart.style.transform = 'translate(-50%, -215%) rotate(-45deg)';
+            }
+        });
+
+        mysteryButton.addEventListener('click', () => {
+            isMessageVisible = !isMessageVisible;
+            hiddenMessage.style.display = isMessageVisible ? 'flex' : 'none';
+        });
+
+        answerInput.addEventListener('input', () => {
+            const value = answerInput.value.toLowerCase();
+            if (value === 'media luna') {
+                window.location.href = 'corazon.html'; // Redirigir a otra página
+            }
+        });
+    </script>
+</body>
+</html>
